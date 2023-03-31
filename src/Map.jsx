@@ -13,6 +13,8 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 const API_URL = 'http://localhost:5000/get_all_Measurments'
+// const API_URL = 'http://132.73.194.98:5000/get_all_Measurments'
+
 
 let DefaultIcon = L.icon({
     iconUrl: icon
@@ -41,26 +43,21 @@ const Map = () =>{
     const data = await response.json()
     // document.write("My message");
     setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...data])
-    console.log(data)
+    // console.log(data)
 
   };
-    // const response = fetch(`${API_URL}`);
-    // const data =  response.json();
-    // const locations = [
-    //   {"name": "light1", "Position": [32.0833,34.8167]},
-    //   {"name": "light2", "Position": [32.0571,34.7528]},
-    //   {"name": "light3", "Position": [31.5, 35]},
-    // ]
+
     useEffect(() => {
       bringdata()
-
+      
     },[]);
     return (
         // console.log(response)
+
         <MapContainer center={[31.5, 35]}
           zoom={8}
           scrollWheelZoom={true}
-          style={{height:'93vh',width:'195vh'}}>
+          style={{height:'93vh',width:'195vh',paddingLeft:'20vh'}}>
         <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -68,7 +65,24 @@ const Map = () =>{
         {measures_data.map((location) =>(
           <Marker position={[location.Latitude,location.Longitude]}>
             <Popup>
-              {'Value: ' + location.m_value +  ', Date: ' + location.m_date + ', Elevation: ' + location.Elevation + ', Cloud Cover: ' + location.CloudCover}
+              <div>
+              <p><b>Value:  {location.m_value}<br></br>
+              Date:   {location.m_date}<br></br>  
+              Elevation: {location.Elevation}<br></br> 
+              Cloud Cover: {location.CloudCover}<br></br>
+              {
+                (location.Device !== 'None')
+                ?(
+                  <b>Device Type: {location.Device}</b>
+                ):
+                <div className="empty">
+
+                </div>
+                }
+              </b></p>
+              </div>
+
+              
             </Popup>
           </Marker>
         ))};

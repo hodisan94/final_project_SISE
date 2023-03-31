@@ -1,7 +1,7 @@
 body {
   font-family: var(--font-roboto);
   background-color: #212426;
-  background-image: url("http://c.files.bbci.co.uk/13D7D/production/_106477218_lightpollutionlarge.jpg");
+  background-image: url("https://earthday.ca/wp-content/uploads/sites/2/2022/03/3_nasa-Q1p7bh3SHj8-unsplash-resize-825x465.png");
   height: 100%;
   background-position: relative;
   background-repeat: no-repeat;
@@ -13,7 +13,7 @@ body {
 
 .topnav {
   overflow: hidden;
-  background-color: rgb(123, 121, 95);
+  background-color: rgb(34, 34, 27);
 }
 
 .topnav a {

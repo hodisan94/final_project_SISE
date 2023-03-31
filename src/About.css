@@ -1,4 +1,6 @@
-
+a{
+    font-family: Arial, Helvetica, sans-serif; 
+}
 h1 {
     font: italic 2.2em "Fira Sans", serif;
     /* font-size: large; */
