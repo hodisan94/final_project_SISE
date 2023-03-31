@@ -1,38 +1,41 @@
-.App {
+body {
+  font-family: var(--font-roboto);
+  background-color: #212426;
+  background-image: url("http://c.files.bbci.co.uk/13D7D/production/_106477218_lightpollutionlarge.jpg");
+  height: 100%;
+  background-position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.map {
+  margin-left: 1%;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: rgb(123, 121, 95);
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
   text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.topnav a.active {
+  background-color: #0468aa;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home p {
+  margin-left: 5%;
+  color: #f2f2f2;
 }
