@@ -22,8 +22,8 @@ import './Map.css';
 // import icon from 'leaflet/dist/images/marker-icon.png';
 // import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-const API_URL = 'http://localhost:5000/get_all_Measurments'
-// const API_URL = 'http://132.73.194.98:5000/get_all_Measurments'
+// const API_URL = 'http://localhost:5000/get_all_Measurments'
+const API_URL = 'http://132.73.84.182/get_all_Measurments'
 
 
 // let DefaultIcon = L.icon({
@@ -124,13 +124,17 @@ const Map = () =>{
   const bringdata = async (title) => {
 
     console.log('hi');
+    console.log('trying to load data');
+
     const response = await fetch(`${API_URL}`)
-    // ,{
-    //   mode: 'no-cors'
-    // })
+
     const data = await response.json()
+    console.log('hi again')
+    console.log(data)
+    console.log("hey again")
     // document.write("My message");
     setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...data])
+    // console.log(measures_data)
     // console.log(data)
 
   };
@@ -164,29 +168,30 @@ const Map = () =>{
     //   console.log('infoWindow: ', infoWindow)
     // };
 
-    const markers = [
-      {
-        id: 1,
-        name: "Chicago, Illinois",
-        location: { lat: 31.881832, lng: 35.023177 }
-      },
-      {
-        id: 2,
-        name: "Denver, Colorado",
-        location: { lat: 31.739235, lng: 35.09025 }
-      },
-      {
-        id: 3,
-        name: "Los Angeles, California",
-        location: { lat: 31.052235, lng: 35.243683 }
-      },
-      {
-        id: 4,
-        name: "New York, New York",
-        location: { lat: 31.712776, lng: 35.005974 }
-      }
-    ];
+    // const markers = [
+    //   {
+    //     id: 1,
+    //     name: "Chicago, Illinois",
+    //     location: { lat: 31.881832, lng: 35.023177 }
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "Denver, Colorado",
+    //     location: { lat: 31.739235, lng: 35.09025 }
+    //   },
+    //   {
+    //     id: 3,
+    //     name: "Los Angeles, California",
+    //     location: { lat: 31.052235, lng: 35.243683 }
+    //   },
+    //   {
+    //     id: 4,
+    //     name: "New York, New York",
+    //     location: { lat: 31.712776, lng: 35.005974 }
+    //   }
+    // ];
 
+    const markers = measures_data;
 
 
 
@@ -220,12 +225,12 @@ const Map = () =>{
 
          {markers.map((location) =>(
           <MarkerF 
-          position={location.location}
-          onClick={() => handleActiveMarker(location.id)}
+          position={{lat:location.Latitude,lng:location.Longitude}}
+          onClick={() => handleActiveMarker(location.m_date)}
             >
-              {activeMarker === location.id ? (
+              {activeMarker === location.m_date ? (
                 <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                  <div>{location.name}</div>
+                  <div>{location.m_value}</div>
                 </InfoWindowF>
               ) : null}
             {/* <Popup>

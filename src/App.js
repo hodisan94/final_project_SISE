@@ -11,8 +11,8 @@ import About from './About';
 // import CsvDownloadButton from 'react-json-to-csv'
 import csvDownload from 'json-to-csv-export'
 
-const API_URL = 'http://localhost:5000/get_all_Measurments'
-// const API_URL = 'http://132.73.194.98:5000/get_all_Measurments'
+// const API_URL = 'http://localhost:5000/get_all_Measurments'
+const API_URL = 'http://132.73.84.182/get_all_Measurments'
 
 
 function App() {
@@ -23,22 +23,22 @@ function App() {
   const [isHome , setIsHome]= useState(false);
   const [isAbout , setIsAbout]= useState(false);
 
-  const bringdata = async (title) => {
+  // const bringdata = async (title) => {
   
-    // console.log('hi');
-    const response = await fetch(`${API_URL}`)
-    // ,{
-    //   mode: 'no-cors'
-    // })
-    const data = await response.json()
-    // document.write("My message");
-    setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...data])
-  };
+  //   // console.log('hi');
+  //   const response = await fetch(`${API_URL}`)
+  //   // ,{
+  //   //   mode: 'no-cors'
+  //   // })
+  //   const data = await response.json()
+  //   // document.write("My message");
+  //   setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...data])
+  // };
 
-  useEffect(() => {
-      bringdata()
+  // useEffect(() => {
+  //     bringdata()
       
-    },[]);
+  //   },[]);
 
   const toggleHome  = () =>{
     if (isHome === false){
