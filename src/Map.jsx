@@ -7,6 +7,16 @@ import { GoogleMap, LoadScript ,MarkerF, InfoWindowF } from '@react-google-maps/
 // import {Map,  GoogleApiWrapper,Marker} from "google-maps-react";
 import './Map.css';
 
+import ClickAwayListener from 'react-click-away-listener';
+
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
+
 // import L from 'leaflet';
 // import {
 //     MapContainer, TileLayer, Marker, Popup, Pane, Circle
@@ -23,7 +33,9 @@ import './Map.css';
 // import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 // const API_URL = 'http://localhost:5000/get_all_Measurments'
-const API_URL = 'http://132.73.84.182/get_all_Measurments'
+const API_URL = 'http://132.73.84.182/web/get_all_Measurments'
+
+const API_KEY = process.env.REACT_API_GOOGLE_MAPS_API_KEY;
 
 
 // let DefaultIcon = L.icon({
@@ -101,7 +113,15 @@ const API_URL = 'http://132.73.84.182/get_all_Measurments'
 //   lng: 35,
 // };
 
+const containerStyle = {
+  width: '99%',
+  height: '88vh'
+};
 
+const center = {
+  lat: 31.5,
+  lng: 35,
+};
 
 
 const Map = () =>{
@@ -139,21 +159,64 @@ const Map = () =>{
 
   };
 
+
+  const bringdata_filterd = async (num) => {
+
+    console.log('hi');
+    console.log('trying to load data');
+
+    const filterd_data = []
+
+    const response = await fetch(`${API_URL}`)
+
+    const data = await response.json()
+    console.log('hi again')
+    console.log(data)
+    console.log(data.length)
+
+    console.log("hey again")
+
+    console.log(num)
+
+    if (num == '1'){
+
+      for (var i=0 ; i < data.length ; i++){
+        if (data[i].Latitude > 32.5){
+          filterd_data.push(data[i])
+        }
+      }
+    }
+    else if (num == '2'){
+      for (i=0 ; i < data.length ; i++){
+        if (data[i].Latitude < 31.6){
+          filterd_data.push(data[i])
+        }
+      }
+    }
+    console.log(filterd_data)
+    setMeasuresData([filterd_data])
+    // document.write("My message");
+    setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
+    // console.log(measures_data)
+    // console.log(data)
+
+  };
+
     useEffect(() => {
       bringdata()
       
     },[]);
 
 
-    const containerStyle = {
-      width: '99%',
-      height: '94vh'
-    };
+    // const containerStyle = {
+    //   width: '99%',
+    //   height: '94vh'
+    // };
     
-    const center = {
-      lat: 31.5,
-      lng: 35,
-    };
+    // const center = {
+    //   lat: 31.5,
+    //   lng: 35,
+    // };
     const position = {
       lat: 31.5,
       lng: 35,
@@ -197,6 +260,10 @@ const Map = () =>{
 
 
     const [activeMarker, setActiveMarker] = useState(null);
+    const [popup, setPopup] = useState(false)
+    // const [isMap , setIsMap]= useState(false);
+     
+
 
 
     const handleActiveMarker = (marker) => {
@@ -205,22 +272,58 @@ const Map = () =>{
       }
       setActiveMarker(marker);
     };
+
+  //   const map_true = async () => {
+  //     if (isMap === false){
+        
+  //       setIsMap(true)
+
+  //   }
+  // };
   
-    // const handleOnLoad = (map) => {
-    //   const bounds = new google.maps.LatLngBounds();
-    //   markers.forEach(({ position }) => bounds.extend(position));
-    //   map.fitBounds(bounds);
-    // };
+
   
   return (
+    <div className='topnav'>
+      <Dropdown as={ButtonGroup}>
+      <Dropdown.Toggle className="button1" variant="success" id="dropdown-custom-1">
+        Map Filters
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item><button className="button1" onClick={()=>setMeasuresData([])}>Clear map</button></Dropdown.Item>
+        <Dropdown.Item><button className="button1" onClick={()=>bringdata([])}>Set markers</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['1'])}>North</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['2'])}>South</button></Dropdown.Item>
+
+      </Dropdown.Menu>
+    </Dropdown>
+      {/* <button class="button button1" onClick={() => setPopup(true)}>Map Filters</button>
+              {popup && (
+            <ClickAwayListener onClickAway={() => setPopup(false)}>
+                    <div className={'popup'}>
+                        <button class="button button1" onClick={()=>setMeasuresData([])}>Clear map</button>
+                        <button class="button button1" onClick={()=>bringdata([])}>Set markers </button>
+                        <button class="button button1" onClick={()=>bringdata_filterd(['1'])}>North</button>
+                        <button class="button button1" onClick={()=>bringdata_filterd(['2'])}>South</button>
+                    </div>
+            </ClickAwayListener>
+        )} */}
+      
+    <div className='test'>
+    {window.google === undefined   ?( 
     <LoadScript 
-    googleMapsApiKey='AIzaSyCs5HTHK1LhYzjHM3Wvbhcx2RpIcnFYvcs'>
+    googleMapsApiKey='AIzaSyCs5HTHK1LhYzjHM3Wvbhcx2RpIcnFYvcs'
+    > 
+
 
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
         zoom={8}
         >
+
+
 
 
          {markers.map((location) =>(
@@ -230,42 +333,89 @@ const Map = () =>{
             >
               {activeMarker === location.m_date ? (
                 <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                  <div>{location.m_value}</div>
+                  <div>
+                  <p><b>Value:  {location.m_value}<br></br>
+                  Date:   {location.m_date}<br></br>  
+                  Elevation: {location.Elevation}<br></br> 
+                  Cloud Cover: {location.CloudCover}<br></br>
+
+                  {
+                    (location.Device !== 'None')
+                    ?(
+                      <b>Device Type: {location.Device}</b>
+                    ):
+                    <div className="empty">
+
+                    </div>
+                    }
+                  </b></p>
+                    </div>
                 </InfoWindowF>
               ) : null}
-            {/* <Popup>
-              <div>
-              <p><b>Value:  {location.m_value}<br></br>
-              Date:   {location.m_date}<br></br>  
-              Elevation: {location.Elevation}<br></br> 
-              Cloud Cover: {location.CloudCover}<br></br>
-              {
-                (location.Device !== 'None')
-                ?(
-                  <b>Device Type: {location.Device}</b>
-                ):
-                <div className="empty">
 
-                </div>
-                }
-              </b></p>
-              </div>
-
-              
-            </Popup> */}
           </MarkerF>
         ))};
           
-          {/* <MarkerF
-          // onLoad={onLoad}
-          position={position}
-          // title={"hi"} 
-         /> */}
+
 
       </GoogleMap>
-    </LoadScript>
-  )
+    </LoadScript> ):
+    <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={8}>
+          
 
+
+         {markers.map((location) =>(
+          <MarkerF 
+          position={{lat:location.Latitude,lng:location.Longitude}}
+          onClick={() => handleActiveMarker(location.m_date)}
+            >
+              {activeMarker === location.m_date ? (
+                <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
+                  <div>
+                  <p><b>Value:  {location.m_value}<br></br>
+                  Date:   {location.m_date}<br></br>  
+                  Elevation: {location.Elevation}<br></br> 
+                  Cloud Cover: {location.CloudCover}<br></br>
+                  Latitude: {location.Latitude}<br></br>
+                  Longitude: {location.Longitude}<br></br>
+                  {
+                    (location.Device !== 'None')
+                    ?(
+                      <b>Device Type: {location.Device}</b>
+                    ):
+                    <div className="empty">
+
+                    </div>
+                    }
+                  </b></p>
+                    </div>
+                </InfoWindowF>
+              ) : null}
+
+          </MarkerF>
+        ))};
+          
+
+      </GoogleMap>
+    }
+      {/* <button
+        type="button"
+        onClick={()=>setMeasuresData([])}
+      >CLEAR MAP</button>
+      <button
+        type="button"
+        onClick={()=>bringdata([])}
+      >SET MAP MARKERS</button> */}
+
+</div>
+</div>
+
+  )
+}
+  
 
 
 //     return (
@@ -319,7 +469,6 @@ const Map = () =>{
 //         //  </MapContainer>
 
 //     );
-}
 
 
 

@@ -8,6 +8,10 @@ import Map from './Map';
 
 import About from './About';
 
+
+
+import ClickAwayListener from 'react-click-away-listener';
+
 // import CsvDownloadButton from 'react-json-to-csv'
 import csvDownload from 'json-to-csv-export'
 
@@ -22,6 +26,11 @@ function App() {
   const [isMap , setIsMap]= useState(true);
   const [isHome , setIsHome]= useState(false);
   const [isAbout , setIsAbout]= useState(false);
+
+
+
+
+  const [popup, setPopup] = useState(false)
 
   // const bringdata = async (title) => {
   
@@ -81,7 +90,7 @@ function App() {
         {/* <a class="active" href="#home"
         onClick={() => toggleHome()}>Home</a> */}
         <a href="#map"
-        onClick={() => toggleMap()}>Map</a>
+        onClick={() => toggleMap(true)}>Map</a>
         {/* <a href="#news" 
         onClick={() => toggleHome()}>News</a>
         <a href="#contact" 
@@ -90,6 +99,7 @@ function App() {
         onClick={() => toggleAbout()}>About</a>
         <a href="#download"  
         onClick={() => csvDownload(dataToConvert)}>Download as csv</a>
+
         </div>
       </header>
 
