@@ -10,21 +10,21 @@ import About from './About';
 
 
 
-import ClickAwayListener from 'react-click-away-listener';
+// import ClickAwayListener from 'react-click-away-listener';
 
 // import CsvDownloadButton from 'react-json-to-csv'
 import csvDownload from 'json-to-csv-export'
 
 // const API_URL = 'http://localhost:5000/get_all_Measurments'
-const API_URL = 'http://132.73.84.182/get_all_Measurments'
+// const API_URL = 'http://132.73.84.182/get_all_Measurments'
 
 
 function App() {
 
   const [measures_data , setMeasuresData] = useState([]);
 
-  const [isMap , setIsMap]= useState(true);
-  const [isHome , setIsHome]= useState(false);
+  const [isMap , setIsMap]= useState(false);
+  const [isHome , setIsHome]= useState(true);
   const [isAbout , setIsAbout]= useState(false);
 
 
@@ -87,10 +87,10 @@ function App() {
     <div className="App">
       <header>
         <div class="topnav">
-        {/* <a class="active" href="#home"
-        onClick={() => toggleHome()}>Home</a> */}
+        <a href="#home"
+        onClick={() => toggleHome(true)}>Home</a>
         <a href="#map"
-        onClick={() => toggleMap(true)}>Map</a>
+        onClick={() => toggleMap()}>Map</a>
         {/* <a href="#news" 
         onClick={() => toggleHome()}>News</a>
         <a href="#contact" 
@@ -122,7 +122,7 @@ function App() {
         {
           isMap
           ?(
-          <Map measures_data={measures_data}>
+          <Map >
 
           </Map>
           ):
