@@ -179,7 +179,7 @@ const Map = () =>{
     console.log(num)
 
     if (num == '1'){
-
+      setMeasuresData([])
       for (var i=0 ; i < data.length ; i++){
         if (data[i].Latitude > 32.5){
           filterd_data.push(data[i])
@@ -187,8 +187,17 @@ const Map = () =>{
       }
     }
     else if (num == '2'){
+      setMeasuresData([])
       for (i=0 ; i < data.length ; i++){
         if (data[i].Latitude < 31.6){
+          filterd_data.push(data[i])
+        }
+      }
+    }
+    else if (num == '3'){
+      setMeasuresData([])
+      for (i=0 ; i < data.length ; i++){
+        if (data[i].Latitude > 31.6 && data[i].Latitude < 32.5){
           filterd_data.push(data[i])
         }
       }
@@ -260,7 +269,7 @@ const Map = () =>{
 
 
     const [activeMarker, setActiveMarker] = useState(null);
-    const [popup, setPopup] = useState(false)
+    // const [popup, setPopup] = useState(false)
     // const [isMap , setIsMap]= useState(false);
      
 
@@ -294,6 +303,7 @@ const Map = () =>{
         <Dropdown.Item><button className="button1" onClick={()=>setMeasuresData([])}>Clear map</button></Dropdown.Item>
         <Dropdown.Item><button className="button1" onClick={()=>bringdata([])}>Set markers</button></Dropdown.Item>
         <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['1'])}>North</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['3'])}>Center</button></Dropdown.Item>
         <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['2'])}>South</button></Dropdown.Item>
 
       </Dropdown.Menu>
@@ -329,7 +339,9 @@ const Map = () =>{
          {markers.map((location) =>(
           <MarkerF 
           position={{lat:location.Latitude,lng:location.Longitude}}
+          icon={"./map-pin-icon-blk.svg"}
           onClick={() => handleActiveMarker(location.m_date)}
+          
             >
               {activeMarker === location.m_date ? (
                 <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
@@ -370,6 +382,13 @@ const Map = () =>{
          {markers.map((location) =>(
           <MarkerF 
           position={{lat:location.Latitude,lng:location.Longitude}}
+          // icon={"C:/Users/dhodi/final_project/react_leaflet/src/icons8-google-maps.svg"}
+          // icon={{
+          //   url: require('C:/Users/dhodi/final_project/react_leaflet/src/icons8-google-maps (1).svg').default
+          // // fillColor: "yellow",
+          // // fillOpacity: 0.9,
+          // // scale: 2
+          // }}
           onClick={() => handleActiveMarker(location.m_date)}
             >
               {activeMarker === location.m_date ? (
