@@ -153,6 +153,7 @@ const Map = () =>{
     console.log(data)
     console.log("hey again")
     // document.write("My message");
+    setMeasuresData([])
     setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...data])
     // console.log(measures_data)
     // console.log(data)

@@ -5,8 +5,8 @@ import Home from'./Home';
 
 import './App.css';
 import Map from './Map';
-
 import About from './About';
+// import Data from './Data';
 
 
 
@@ -16,7 +16,7 @@ import About from './About';
 import csvDownload from 'json-to-csv-export'
 
 // const API_URL = 'http://localhost:5000/get_all_Measurments'
-// const API_URL = 'http://132.73.84.182/get_all_Measurments'
+const API_URL = 'http://132.73.84.182/web/get_all_Measurments'
 
 
 function App() {
@@ -26,34 +26,37 @@ function App() {
   const [isMap , setIsMap]= useState(false);
   const [isHome , setIsHome]= useState(true);
   const [isAbout , setIsAbout]= useState(false);
+  // const [isData, setIsData]= useState(false);
 
 
 
 
-  const [popup, setPopup] = useState(false)
+  // const [popup, setPopup] = useState(false)
 
-  // const bringdata = async (title) => {
+  const bringdata = async (title) => {
   
-  //   // console.log('hi');
-  //   const response = await fetch(`${API_URL}`)
-  //   // ,{
-  //   //   mode: 'no-cors'
-  //   // })
-  //   const data = await response.json()
-  //   // document.write("My message");
-  //   setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...data])
-  // };
+    // console.log('hi');
+    const response = await fetch(`${API_URL}`)
+    // ,{
+    //   mode: 'no-cors'
+    // })
+    const data = await response.json()
+    // document.write("My message");
+    setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...data])
+  };
 
-  // useEffect(() => {
-  //     bringdata()
+  useEffect(() => {
+      bringdata()
       
-  //   },[]);
+    },[]);
 
   const toggleHome  = () =>{
     if (isHome === false){
       setIsHome(true)
       setIsMap(false)
       setIsAbout(false)
+      // setIsData(false)
+
 
     }
   }
@@ -63,6 +66,8 @@ function App() {
       setIsHome(false)
       setIsMap(true)
       setIsAbout(false)
+      // setIsData(false)
+
     }
   }
 
@@ -71,8 +76,19 @@ function App() {
       setIsHome(false)
       setIsMap(false)
       setIsAbout(true)
+      // setIsData(false)
+
     }
   }
+
+  // const toggleData  = () =>{
+  //   if (isData === false){
+  //     setIsHome(false)
+  //     setIsMap(false)
+  //     setIsAbout(false)
+  //     setIsData(true)
+  //   }
+  // }
 
   const dataToConvert = {
     data: measures_data,
@@ -97,9 +113,11 @@ function App() {
         onClick={() => toggleHome()}>Contact</a> */}
         <a href="#about" 
         onClick={() => toggleAbout()}>About</a>
-        <a href="#download"  
-        onClick={() => csvDownload(dataToConvert)}>Download as csv</a>
-
+        <div className='Data'>
+        <a  href="#download"
+        // onClick={() => toggleData()}>Download Data as csv</a>  
+        onClick={() => csvDownload(dataToConvert)}>Download Data as csv</a>
+        </div>
         </div>
       </header>
 
@@ -144,6 +162,19 @@ function App() {
 
          </div>
         }
+        {/* <div className='data'>
+        {
+          isData
+          ?(
+          <Data>
+
+          </Data>
+          ):
+          <div className="empty">
+
+         </div>
+        }
+        </div> */}
 
       </div>
     </div>

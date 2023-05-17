@@ -7,6 +7,7 @@ const About = () =>{
     
     return (
         <div>
+            <br></br>
             <h1>The Team:</h1>
             <h1>The four horsemans, the protecrtos of light(pollution)</h1>
             <h1> - Omri "The Debugger" Man</h1>
