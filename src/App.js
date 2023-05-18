@@ -162,19 +162,7 @@ function App() {
 
          </div>
         }
-        {/* <div className='data'>
-        {
-          isData
-          ?(
-          <Data>
 
-          </Data>
-          ):
-          <div className="empty">
-
-         </div>
-        }
-        </div> */}
 
       </div>
     </div>
