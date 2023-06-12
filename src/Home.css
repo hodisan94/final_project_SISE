@@ -1,11 +1,11 @@
 
 h1 {
-    font: italic 2.1em "Fira Sans", serif;
+    /* font: italic 2.1em "Fira Sans", serif; */
     /* font-size: large; */
     margin-left: 2%;
     color: rgb(215, 248, 0);
 }
 
 iframe {
-    margin-left: 5%;
+    margin-left: 35%;
 }

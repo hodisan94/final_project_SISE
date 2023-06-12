@@ -320,6 +320,9 @@ const Map = () =>{
                     </div>
             </ClickAwayListener>
         )} */}
+
+{/* <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs5HTHK1LhYzjHM3Wvbhcx2RpIcnFYvcs&callback=initMap"
+  type="text/javascript"></script> */}
       
     <div className='test'>
     {window.google === undefined   ?( 

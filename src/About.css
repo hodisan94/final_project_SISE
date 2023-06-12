@@ -2,8 +2,18 @@ a{
     font-family: Arial, Helvetica, sans-serif; 
 }
 h1 {
-    font: italic 2.2em "Fira Sans", serif;
-    /* font-size: large; */
+    font-family: "Times New Roman", Times, serif ;
+    font-size: xx-large;
     margin-left: 5%;
-    color: rgb(215, 248, 0);
+    color: rgb(179, 203, 28);
+    text-align: center;
+}
+
+h2 {
+    font-family: "Times New Roman", Times, serif ;
+    font-size: larger;
+    margin-left: 5%;
+    color: rgb(179, 203, 28);
+    text-align: center;
+
 }
