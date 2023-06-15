@@ -216,7 +216,7 @@ const Map = () =>{
       setMeasuresData([])
       // setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
       for (i=0 ; i < data.length ; i++){
-        if (data[i].m_value <= 3){
+        if (data[i].m_value <= 2){
           filterd_data.push(data[i])
         }
       }
@@ -225,7 +225,7 @@ const Map = () =>{
       setMeasuresData([])
       // setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
       for (i=0 ; i < data.length ; i++){
-        if (data[i].m_value > 3 && data[i].m_value < 7){
+        if (data[i].m_value >= 3 && data[i].m_value < 6){
           filterd_data.push(data[i])
         }
       }
@@ -234,13 +234,13 @@ const Map = () =>{
       setMeasuresData([])
       // setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
       for (i=0 ; i < data.length ; i++){
-        if (data[i].m_value >= 7){
+        if (data[i].m_value >= 6){
           filterd_data.push(data[i])
         }
       }
     }
     console.log(filterd_data)
-    setMeasuresData([filterd_data])
+    // setMeasuresData([filterd_data])
     // document.write("My message");
     setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
     // console.log(measures_data)
@@ -278,16 +278,16 @@ const Map = () =>{
     };
 
     const handleMarkerColor = (marker) => {
-      if (marker.m_value <= 3 ){
+      if (marker.m_value <= 2 ){
         return colors.green
       }
-      else if (marker.m_value > 3 && marker.m_value <= 5 ){
+      else if (marker.m_value === 3){
         return colors.yellow
       }
-      else if (marker.m_value > 5 && marker.m_value <= 6 ){
+      else if (marker.m_value === 4 || marker.m_value === 5 ){
         return colors.orange
       }
-      else if (marker.m_value> 6 && marker.m_value <= 7 ){
+      else if (marker.m_value === 6 ){
         return colors.red
       }
       else{
@@ -309,12 +309,12 @@ const Map = () =>{
       <Dropdown.Menu>
         <Dropdown.Item><button className="button1" onClick={()=>setMeasuresData([])}>Clear map</button></Dropdown.Item>
         <Dropdown.Item><button className="button1" onClick={()=>bringdata([])}>Set markers</button></Dropdown.Item>
-        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['1'])}>North</button></Dropdown.Item>
-        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['3'])}>Center</button></Dropdown.Item>
-        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['2'])}>South</button></Dropdown.Item>
-        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['4'])}>Low light pollution</button></Dropdown.Item>
-        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['5'])}>Moderate light pollution</button></Dropdown.Item>
-        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['6'])}>High light pollution</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['1']);}}>North</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['3']);}}>Center</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['2']);}}>South</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['4']);}}>Low light pollution</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['5']);}}>Moderate light pollution</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['6']);}}>High light pollution</button></Dropdown.Item>
 
 
       </Dropdown.Menu>
