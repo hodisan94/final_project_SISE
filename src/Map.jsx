@@ -308,7 +308,7 @@ const Map = () =>{
 
       <Dropdown.Menu>
         <Dropdown.Item><button className="button1" onClick={()=>setMeasuresData([])}>Clear map</button></Dropdown.Item>
-        <Dropdown.Item><button className="button1" onClick={()=>bringdata([])}>Set markers</button></Dropdown.Item>
+        <Dropdown.Item><button className="button1" onClick={()=>{setMeasuresData([]); bringdata([]);}}>Set markers</button></Dropdown.Item>
         <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['1']);}}>North</button></Dropdown.Item>
         <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['3']);}}>Center</button></Dropdown.Item>
         <Dropdown.Item> <button className="button1" onClick={()=>{setMeasuresData([]); bringdata_filterd(['2']);}}>South</button></Dropdown.Item>
