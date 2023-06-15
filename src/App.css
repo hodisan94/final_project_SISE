@@ -1,7 +1,8 @@
 body {
   font-family: var(--font-roboto);
   background-color: #212426;
-  background-image: url("https://earthday.ca/wp-content/uploads/sites/2/2022/03/3_nasa-Q1p7bh3SHj8-unsplash-resize-825x465.png");
+  background-image: url("C:/Users/dhodi/final_project/react_leaflet/public/Tel_Aviv.jpg");
+  /* background-image: url("https://earthday.ca/wp-content/uploads/sites/2/2022/03/3_nasa-Q1p7bh3SHj8-unsplash-resize-825x465.png"); */
   height: 100%;
   background-position: relative;
   background-repeat: no-repeat;

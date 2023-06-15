@@ -124,6 +124,14 @@ const center = {
   lng: 35,
 };
 
+const colors = {
+  green: "./green-dot.png",
+  yellow: "./yellow-dot.png",
+  orange: "./orange-dot.png",
+  red: "./red-dot.png",
+  purple: "./purple-dot.png"
+}
+
 
 const Map = () =>{
 
@@ -164,21 +172,21 @@ const Map = () =>{
 
   const bringdata_filterd = async (num) => {
 
-    console.log('hi');
-    console.log('trying to load data');
+    // console.log('hi');
+    // console.log('trying to load data');
 
     const filterd_data = []
 
     const response = await fetch(`${API_URL}`)
 
     const data = await response.json()
-    console.log('hi again')
-    console.log(data)
-    console.log(data.length)
+    // console.log('hi again')
+    // console.log(data)
+    // console.log(data.length)
 
-    console.log("hey again")
+    // console.log("hey again")
 
-    console.log(num)
+    // console.log(num)
 
     if (num == '1'){
       setMeasuresData([])
@@ -204,6 +212,33 @@ const Map = () =>{
         }
       }
     }
+    else if (num == '4'){
+      setMeasuresData([])
+      // setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
+      for (i=0 ; i < data.length ; i++){
+        if (data[i].m_value <= 3){
+          filterd_data.push(data[i])
+        }
+      }
+    }
+    else if (num == '5'){
+      setMeasuresData([])
+      // setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
+      for (i=0 ; i < data.length ; i++){
+        if (data[i].m_value > 3 && data[i].m_value < 7){
+          filterd_data.push(data[i])
+        }
+      }
+    }
+    else if (num == '6'){
+      setMeasuresData([])
+      // setMeasuresData(oldmeasures_data => [...oldmeasures_data , ...filterd_data])
+      for (i=0 ; i < data.length ; i++){
+        if (data[i].m_value >= 7){
+          filterd_data.push(data[i])
+        }
+      }
+    }
     console.log(filterd_data)
     setMeasuresData([filterd_data])
     // document.write("My message");
@@ -219,51 +254,7 @@ const Map = () =>{
     },[]);
 
 
-    // const containerStyle = {
-    //   width: '99%',
-    //   height: '94vh'
-    // };
-    
-    // const center = {
-    //   lat: 31.5,
-    //   lng: 35,
-    // };
-    const position = {
-      lat: 31.5,
-      lng: 35,
-    };
-    
-    
-    // const onLoad = marker => {
-    //   console.log('marker: ', marker)
-    // };
 
-    // const onLoad = infoWindow => {
-    //   console.log('infoWindow: ', infoWindow)
-    // };
-
-    // const markers = [
-    //   {
-    //     id: 1,
-    //     name: "Chicago, Illinois",
-    //     location: { lat: 31.881832, lng: 35.023177 }
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "Denver, Colorado",
-    //     location: { lat: 31.739235, lng: 35.09025 }
-    //   },
-    //   {
-    //     id: 3,
-    //     name: "Los Angeles, California",
-    //     location: { lat: 31.052235, lng: 35.243683 }
-    //   },
-    //   {
-    //     id: 4,
-    //     name: "New York, New York",
-    //     location: { lat: 31.712776, lng: 35.005974 }
-    //   }
-    // ];
 
     const markers = measures_data;
 
@@ -272,7 +263,7 @@ const Map = () =>{
 
     const [activeMarker, setActiveMarker] = useState(null);
 
-    const [markerColoer, setMarkerColer] = useState("./red-dot.png");
+    // const [markerColoer, setMarkerColer] = useState(null);
     // const [popup, setPopup] = useState(false)
     // const [isMap , setIsMap]= useState(false);
      
@@ -288,23 +279,23 @@ const Map = () =>{
 
     const handleMarkerColor = (marker) => {
       if (marker.m_value <= 3 ){
-        return "./green-dot.png"
+        return colors.green
       }
-      else if (marker.m_value > 3 && marker.m_value < 7 ){
-        return "./yellow-dot.png"
+      else if (marker.m_value > 3 && marker.m_value <= 5 ){
+        return colors.yellow
+      }
+      else if (marker.m_value > 5 && marker.m_value <= 6 ){
+        return colors.orange
+      }
+      else if (marker.m_value> 6 && marker.m_value <= 7 ){
+        return colors.red
       }
       else{
-        return "./red-dot.png"
+        return colors.purple
       }
 
     }
-  //   const map_true = async () => {
-  //     if (isMap === false){
-        
-  //       setIsMap(true)
 
-  //   }
-  // };
   
 
   
@@ -321,23 +312,13 @@ const Map = () =>{
         <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['1'])}>North</button></Dropdown.Item>
         <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['3'])}>Center</button></Dropdown.Item>
         <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['2'])}>South</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['4'])}>Low light pollution</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['5'])}>Moderate light pollution</button></Dropdown.Item>
+        <Dropdown.Item> <button className="button1" onClick={()=>bringdata_filterd(['6'])}>High light pollution</button></Dropdown.Item>
+
 
       </Dropdown.Menu>
     </Dropdown>
-      {/* <button class="button button1" onClick={() => setPopup(true)}>Map Filters</button>
-              {popup && (
-            <ClickAwayListener onClickAway={() => setPopup(false)}>
-                    <div className={'popup'}>
-                        <button class="button button1" onClick={()=>setMeasuresData([])}>Clear map</button>
-                        <button class="button button1" onClick={()=>bringdata([])}>Set markers </button>
-                        <button class="button button1" onClick={()=>bringdata_filterd(['1'])}>North</button>
-                        <button class="button button1" onClick={()=>bringdata_filterd(['2'])}>South</button>
-                    </div>
-            </ClickAwayListener>
-        )} */}
-
-{/* <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs5HTHK1LhYzjHM3Wvbhcx2RpIcnFYvcs&callback=initMap"
-  type="text/javascript"></script> */}
       
     <div className='test'>
     {window.google === undefined   ?( 
@@ -358,7 +339,7 @@ const Map = () =>{
          {markers.map((location) =>(
           <MarkerF 
           position={{lat:location.Latitude,lng:location.Longitude}}
-          icon={"./map-pin-icon-blk.svg"}
+          icon={handleMarkerColor(location)}
           onClick={() => handleActiveMarker(location.m_date)}
           
             >
@@ -405,12 +386,7 @@ const Map = () =>{
           
  
           icon={handleMarkerColor(location)}
-          // icon={{
-          //   url: require('C:/Users/dhodi/final_project/react_leaflet/src/icons8-google-maps (1).svg').default
-          // // fillColor: "yellow",
-          // // fillOpacity: 0.9,
-          // // scale: 2
-          // }}
+
           onClick={() => handleActiveMarker(location.m_date)}
             >
               {activeMarker === location.m_date ? (
