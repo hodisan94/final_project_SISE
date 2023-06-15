@@ -1,7 +1,7 @@
 
-h1 {
+home .h1 {
     /* font: italic 2.1em "Fira Sans", serif; */
-    /* font-size: large; */
+    font-size: large;
     margin-left: 2%;
     color: rgb(215, 248, 0);
 }
