@@ -13,6 +13,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { marker } from 'leaflet';
 
 
 
@@ -270,6 +271,8 @@ const Map = () =>{
 
 
     const [activeMarker, setActiveMarker] = useState(null);
+
+    const [markerColoer, setMarkerColer] = useState("./red-dot.png");
     // const [popup, setPopup] = useState(false)
     // const [isMap , setIsMap]= useState(false);
      
@@ -283,6 +286,18 @@ const Map = () =>{
       setActiveMarker(marker);
     };
 
+    const handleMarkerColor = (marker) => {
+      if (marker.m_value <= 3 ){
+        return "./green-dot.png"
+      }
+      else if (marker.m_value > 3 && marker.m_value < 7 ){
+        return "./yellow-dot.png"
+      }
+      else{
+        return "./red-dot.png"
+      }
+
+    }
   //   const map_true = async () => {
   //     if (isMap === false){
         
@@ -384,9 +399,12 @@ const Map = () =>{
 
 
          {markers.map((location) =>(
+          
           <MarkerF 
           position={{lat:location.Latitude,lng:location.Longitude}}
-          // icon={"C:/Users/dhodi/final_project/react_leaflet/src/icons8-google-maps.svg"}
+          
+ 
+          icon={handleMarkerColor(location)}
           // icon={{
           //   url: require('C:/Users/dhodi/final_project/react_leaflet/src/icons8-google-maps (1).svg').default
           // // fillColor: "yellow",
