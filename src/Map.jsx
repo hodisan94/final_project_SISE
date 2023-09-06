@@ -323,7 +323,7 @@ const Map = () =>{
     <div className='test'>
     {window.google === undefined   ?( 
     <LoadScript 
-    googleMapsApiKey='AIzaSyCs5HTHK1LhYzjHM3Wvbhcx2RpIcnFYvcs'
+    googleMapsApiKey= 'API_KEY'
     > 
 
 
@@ -396,8 +396,8 @@ const Map = () =>{
                   Date:   {location.m_date}<br></br>  
                   Elevation: {location.Elevation}<br></br> 
                   Cloud Cover: {location.CloudCover}<br></br>
-                  Latitude: {location.Latitude}<br></br>
-                  Longitude: {location.Longitude}<br></br>
+                  {/* Latitude: {location.Latitude}<br></br>
+                  Longitude: {location.Longitude}<br></br> */}
                   {
                     (location.Device !== 'None')
                     ?(
